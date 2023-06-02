@@ -1,0 +1,19 @@
+.navbar-end {
+    width: unset !important;
+    justify-content: flex-end;
+}
+
+.menu-horizontal {
+    display: inline-flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+}
+
+.menu {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap !important;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    padding: 0.5rem;
+}

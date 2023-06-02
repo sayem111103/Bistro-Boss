@@ -3,6 +3,7 @@ import SectionHeader from "../../components/SectionHeader/SectionHeader";
 import CoverBan from "../CoverBan/CoverBan";
 
 const CategoryMenu = ({ data, title, img}) => {
+    
     return (
         <>
             {title && <CoverBan img={img} header={title} para={'Would you like to try a dish?'}></CoverBan>}
