@@ -13,7 +13,6 @@ import useAuth from '../../../Hooks/useAuth';
 const Home = () => {
     const {loader, user} = useAuth();
     
-    console.log(user);
     if(loader){
        return <div className="h-[100vh] flex justify-center items-center">
             <Player

@@ -3,10 +3,10 @@ import bgimg from '../../assets/others/authentication.png'
 import loginimg from '../../assets/others/authentication2.png'
 import { loadCaptchaEnginge, LoadCanvasTemplate, validateCaptcha } from 'react-simple-captcha';
 import { useEffect, useState } from 'react';
-import { FcGoogle } from 'react-icons/all';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import useAuth from '../../Hooks/useAuth';
+import SocialLogin from '../../components/SocialLogin/SocialLogin';
 
 const Login = () => {
     const navigate = useNavigate();
@@ -104,9 +104,7 @@ const Login = () => {
                             <div className="flex flex-col w-full justify-center border-opacity-50">
                                 <Link to='/register' className='text-center text-[rgba(209,159,84,0.7)]'>New here? Create a New Account</Link>                                
                                 <div className='text-center mt-4 capitalize'>or sign in with</div>
-                                <div className="grid h-20 card rounded-box place-items-center">
-                                    <FcGoogle className='text-6xl cursor-pointer'></FcGoogle>                                    
-                                </div>
+                                <SocialLogin></SocialLogin>
                             </div>
                         </div>
                     </div>

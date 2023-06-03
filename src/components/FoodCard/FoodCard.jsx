@@ -13,7 +13,6 @@ const FoodCard = ({md}) => {
         if(!user){
             return navigate('/login');
         }
-        console.log(item);
         const carts = {
             email: user.email,
             id: item._id,

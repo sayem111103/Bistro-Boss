@@ -61,14 +61,9 @@ const Navbar = () => {
                             </div>
                         </label>
                         <ul tabIndex="0" className="menu menu-sm dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
-                            <li>
-                                <a className="justify-between">
-                                    Profile
-                                    <span className="badge">New</span>
-                                </a>
-                            </li>
-                            <li><a>Settings</a></li>
-                            <li onClick={handleLogout}><a>Logout</a></li>
+                            <li><Link className="uppercase text-sm active:bg-[unset] focus:bg-[unset] hover:bg-[unset] hover:text-[#EEFF25]" to='/dashboard'>DASHBOARD</Link></li>
+
+                            <li onClick={handleLogout}><a className="uppercase text-sm active:bg-[unset] focus:bg-[unset] hover:bg-[unset] hover:text-[#EEFF25]">Logout</a></li>
                         </ul>
                     </div> : <li className="list-none"><Link className="uppercase text-sm active:bg-[unset] focus:bg-[unset] hover:bg-[unset] hover:text-[#EEFF25]" to='/login'>Login</Link></li>}                    
                 </div>
