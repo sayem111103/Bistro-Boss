@@ -7,6 +7,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import useAuth from '../../Hooks/useAuth';
 import SocialLogin from '../../components/SocialLogin/SocialLogin';
+import { Helmet } from 'react-helmet-async';
 
 const Login = () => {
     const navigate = useNavigate();
@@ -58,6 +59,9 @@ const Login = () => {
     }
     return (
         <section className="py-[100px] flex justify-center items-center" style={{ backgroundImage: `url(${bgimg})` }}>
+             <Helmet>
+                <title>Bistro Boss | Login</title>
+            </Helmet>
             <div className='w-9/12 px-4 py-6' style={{ backgroundImage: `url(${bgimg})`, boxShadow: 'rgba(0,0,0,0.2) 3px 4px 10px 2px' }}>
                 <div className="hero min-h-screen">
                     <div className="hero-content flex-col lg:flex-row lg:gap-4">
@@ -98,7 +102,7 @@ const Login = () => {
                                     <LoadCanvasTemplate />
                                     <input onBlur={handleCaptcha} type="text" name="captcha" placeholder="type the captcha above" className="input bg-white mt-3 input-bordered" />
                                 </div>
-                                <input disabled={disabled} className="btn mt-4 border-0 disabled:bg-[rgba(209,159,84,0.2)] disabled:text-[rgba(255,255,255,0.5)] hover:bg-[rgba(209,159,84,0.7)] bg-[rgba(209,159,84,0.7)] text-white" type="submit" />
+                                <input disabled={disabled} className="btn mt-4 border-0 disabled:bg-[rgba(209,159,84,0.2)] disabled:text-[rgba(255,255,255,0.5)] hover:bg-[rgba(209,159,84,0.7)] bg-[rgba(209,159,84,0.7)] text-white" type="submit" value='login' />
                             </form>
 
                             <div className="flex flex-col w-full justify-center border-opacity-50">

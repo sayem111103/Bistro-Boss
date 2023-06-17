@@ -11,13 +11,13 @@ import React, { useEffect, useState } from "react";
 import { Autoplay, Pagination, Navigation } from "swiper";
 import { Rating } from "@smastrom/react-rating";
 import '@smastrom/react-rating/style.css'
-import useAxiosSecure from "../../../Hooks/useAxiosSecure";
+import useAxios from "../../../Hooks/useAxios";
 
 const Review = () => {
-    const [axiosSecure] = useAxiosSecure()
+    const [axiosApi] = useAxios()
     const [review, setReview] = useState([])
     useEffect(() => {
-        axiosSecure('/review')
+        axiosApi('/review')
             .then(res => setReview(res.data))
     }, []);
 

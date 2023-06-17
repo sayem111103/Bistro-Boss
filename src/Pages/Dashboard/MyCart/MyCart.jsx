@@ -1,12 +1,12 @@
 import Swal from "sweetalert2";
-import useAxiosSecure from "../../../Hooks/useAxiosSecure";
 import useMyCarts from "../../../Hooks/useMyCarts";
 import { RiDeleteBin6Fill } from 'react-icons/all';
 import './MyCart.css'
+import useAxios from "../../../Hooks/useAxios";
 
 const MyCart = () => {
     const [cart, refetch] = useMyCarts();
-    const [axiosSecure] = useAxiosSecure();
+    const [axiosApi] = useAxios();
     const totalPrice = cart.reduce((total, item) => { return total + item.price }, 0)
     const totalFixed = totalPrice.toFixed(2);
     const handleDelete = (_id) => {
@@ -20,7 +20,7 @@ const MyCart = () => {
             confirmButtonText: 'Yes, delete it!'
         }).then((result) => {
             if (result.isConfirmed) {
-                axiosSecure.delete(`/carts/${_id}`)
+                axiosApi.delete(`/carts/${_id}`)
                     .then(res => {
                         console.log(res.data);
                         refetch()

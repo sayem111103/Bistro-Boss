@@ -6,6 +6,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import useAuth from '../../Hooks/useAuth';
 import useAxiosSecure from '../../Hooks/useAxiosSecure';
 import Swal from 'sweetalert2';
+import { Helmet } from 'react-helmet-async';
 
 const SignUp = () => {
     const navigate = useNavigate();
@@ -14,10 +15,10 @@ const SignUp = () => {
     const [errorMessages, setError] = useState('');
     const [axiosSecure] = useAxiosSecure();
     const { createWithemailAndPass, user, updatEProfile } = useAuth();
-    const { register, handleSubmit, watch, formState: { errors } } = useForm();
     if (user) {
         navigate('/')
     }
+    const { register, handleSubmit, watch, formState: { errors } } = useForm();
     const onSubmit = data => {
         const email = data.email;
         const password = data.password;
@@ -67,6 +68,9 @@ const SignUp = () => {
 
     return (
         <section className="py-[100px] flex justify-center items-center" style={{ backgroundImage: `url(${bgimg})` }}>
+             <Helmet>
+                <title>Bistro Boss | Sign Up</title>
+            </Helmet>
             <div className='w-9/12 px-4 py-6' style={{ backgroundImage: `url(${bgimg})`, boxShadow: 'rgba(0,0,0,0.2) 3px 4px 10px 2px' }}>
                 <div className="hero min-h-screen">
                     <div className="hero-content flex-col lg:flex-row-reverse lg:gap-4">
@@ -125,7 +129,7 @@ const SignUp = () => {
                                 {errors.password?.type === 'maxLength' && <span className='text-red-500'>Password should be maximum 8 character</span>}
                                 {errors.password?.type === 'pattern' && <span className='text-red-500'>Password should be Minimum eight characters, at least one letter and one number.</span>}
 
-                                <input className="btn mt-4 border-0 hover:bg-[rgba(209,159,84,0.7)] bg-[rgba(209,159,84,0.7)] text-white" type="submit" />
+                                <input className="btn mt-4 border-0 hover:bg-[rgba(209,159,84,0.7)] bg-[rgba(209,159,84,0.7)] text-white" type="sign up" />
                                 <div className='text-center'><Link to='/login' className='text-center text-[rgba(209,159,84,0.7)]'>Already registered? Go to log in</Link> </div>
                             </form>
                         </div>

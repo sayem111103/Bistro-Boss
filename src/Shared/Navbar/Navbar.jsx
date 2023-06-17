@@ -31,7 +31,7 @@ const Navbar = () => {
         <li><Link className="uppercase text-sm active:bg-[unset] focus:bg-[unset] hover:bg-[unset] hover:text-[#EEFF25]" to='/dashboard'>DASHBOARD</Link></li>
         <li><Link className="uppercase text-sm active:bg-[unset] focus:bg-[unset] hover:bg-[unset] hover:text-[#EEFF25]" to='/ourmenu'>Our Menu</Link></li>
         <li><Link className="uppercase text-sm active:bg-[unset] focus:bg-[unset] hover:bg-[unset] hover:text-[#EEFF25]" to='/ourshop'>Our Shop</Link></li>
-        <><Link className="uppercase text-sm active:bg-green-400 bg-green-400 h-8 w-8 flex justify-center items-center relative rounded-[50%] focus:bg-green-400 hover:bg-bg-400" to='dashboard/mycart'> <BsFillCartFill className="text-sm"></BsFillCartFill><div className="bg-red-600 text-xs h-6 w-6 flex justify-center items-center rounded-[50%] absolute -bottom-2 -right-2">{cart?.length || 0}</div></Link></>
+        <><Link className="uppercase text-sm active:bg-green-400 bg-green-400 h-8 w-8 flex justify-center items-center relative rounded-[50%] focus:bg-green-400 hover:bg-bg-400" to='dashboard/mycart'> <BsFillCartFill className="text-sm"></BsFillCartFill><div className="bg-red-600 text-xs h-6 w-6 flex justify-center items-center rounded-[50%] absolute -bottom-2 -right-2">{cart? cart?.length : 0}</div></Link></>
     </>
     return (
         <>

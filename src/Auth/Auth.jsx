@@ -1,29 +1,34 @@
 import React, { createContext, useEffect, useState } from 'react';
 import { createUserWithEmailAndPassword, deleteUser, getAuth, onAuthStateChanged, signInWithEmailAndPassword, updateProfile } from "firebase/auth";
 import app from '../Firebase/firebase.config';
+import axios from 'axios';
 
 export const authContext = createContext()
-const Auth = ({children}) => {
+const Auth = ({ children }) => {
     const auth = getAuth(app);
     const [user, setUser] = useState(null)
     const [loader, setLoader] = useState(true)
 
-    const createWithemailAndPass = (email, password) =>{
+    const createWithemailAndPass = (email, password) => {
+        setLoader(true)
         return createUserWithEmailAndPassword(auth, email, password)
     }
 
     const signInWithEmailPass = (email, password) => {
+        setLoader(true)
         return signInWithEmailAndPassword(auth, email, password)
     }
 
-    const updatEProfile =(name, photo)=>{
-        return updateProfile(auth.currentUser,{
+    const updatEProfile = (name, photo) => {
+        setLoader(true)
+        return updateProfile(auth.currentUser, {
             displayName: name,
             photoURL: photo
         })
     }
 
-    const deleteAnUser =()=>{
+    const deleteAnUser = () => {
+        setLoader(true)
         return deleteUser(auth.currentUser)
     }
 
@@ -38,15 +43,26 @@ const Auth = ({children}) => {
     }
 
     // state observer 
-    useEffect(()=>{
-        const unsubscribe = () =>{
-            onAuthStateChanged(auth, user=>{
+    useEffect(() => {
+        const unsubscribe = () => {
+            onAuthStateChanged(auth, user => {
                 setUser(user)
-                setLoader(false)
+                if (user) {
+                    axios.post('http://localhost:5000/jwt', { email: user.email })
+                        .then(res => {
+                            const token = res.data.token;
+                            localStorage.setItem('bistro-token', token)
+                            setLoader(false)
+                        })
+                }
+                else{
+                    localStorage.removeItem('bistro-token')
+                    setLoader(false)
+                }
             })
         }
 
-        return ()=>{
+        return () => {
             return unsubscribe();
         }
     }, [user])

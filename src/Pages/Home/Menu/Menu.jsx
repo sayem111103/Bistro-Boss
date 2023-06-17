@@ -9,8 +9,8 @@ const Menu = () => {
         .then(data => setMenu(data))
     },[menu])
 
-    return (
-        <section className="pb-24 max-w-screen-lg mx-auto">
+    return (        
+        <section className="pb-24 max-w-screen-lg mx-auto">           
             <SectionHeader subName={'Check it out'} name={'FROM OUR MENU'}></SectionHeader>
             <div className="flex flex-wrap justify-center gap-4 py-14">
                 {menu.slice(0,6).map(md => <div className="w-[320px] gap-3 flex" key={md._id}>

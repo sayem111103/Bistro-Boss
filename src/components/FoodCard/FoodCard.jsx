@@ -1,18 +1,31 @@
 import Swal from "sweetalert2";
 import useAuth from "../../Hooks/useAuth";
-import useAxiosSecure from "../../Hooks/useAxiosSecure";
 import useMyCarts from "../../Hooks/useMyCarts";
 import { useNavigate } from "react-router-dom";
+import useAxiosSecure from "../../Hooks/useAxiosSecure";
 
 const FoodCard = ({md}) => {
     const navigate = useNavigate();
     const [,refetch] = useMyCarts()
     const {user} = useAuth()
     const [axiosSecure] = useAxiosSecure();
-    const handleAddToCart = (item) =>{
+    const handleAddToCart = (item) =>{        
         if(!user){
-            return navigate('/login');
+            return Swal.fire({
+                title: 'Are you sure?',
+                text: "If you want to add cart login first!!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Login'
+              }).then((result) => {
+                if (result.isConfirmed) {                  
+                    navigate('/login');
+                }
+              })
         }
+        
         const carts = {
             email: user.email,
             id: item._id,

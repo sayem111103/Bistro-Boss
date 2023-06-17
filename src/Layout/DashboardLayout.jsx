@@ -2,9 +2,10 @@ import React from 'react';
 import { Link, Outlet } from 'react-router-dom';
 import { AiFillHome,BsFillCalendarWeekFill,AiOutlineShoppingCart,MdReviews,BsCalendarHeart,MdPayment,ImSpoonKnife,BsFillJournalBookmarkFill,AiOutlineBars,BsPeopleFill } from 'react-icons/all';
 import ActiveLink from '../components/ActiveLink/ActiveLink';
+import useAdmin from '../Hooks/useAdmin';
 
 const DashboardLayout = () => {
-    const isAdmin = true;
+    const [isAdmin] = useAdmin();
     const navItems = <>
        {isAdmin? <><li><ActiveLink to='/dashboard/adminhome' className='text-black uppercase'> <AiFillHome className='text-lg'></AiFillHome>Admin Home</ActiveLink></li>
         <li><ActiveLink to='/dashboard/additems' className='text-black uppercase'> <ImSpoonKnife className='text-lg'></ImSpoonKnife>add items</ActiveLink></li>

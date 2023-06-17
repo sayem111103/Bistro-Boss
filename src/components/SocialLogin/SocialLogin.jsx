@@ -1,12 +1,16 @@
 import { FcGoogle } from 'react-icons/all';
 import useAuth from '../../Hooks/useAuth';
 import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
-import useAxiosSecure from '../../Hooks/useAxiosSecure';
 import Swal from 'sweetalert2';
+import { useLocation, useNavigate } from 'react-router-dom';
+import useAxios from '../../Hooks/useAxios';
 
 const SocialLogin = () => {
     const {auth} = useAuth();
-    const [axiosSecure] = useAxiosSecure()
+    const navigate = useNavigate();
+    const location = useLocation();
+    let from = location.state?.from?.pathname || "/";
+    const [axiosApi] = useAxios()
     const google = new GoogleAuthProvider();
     const signWithSocial =(provider)=>{
         signInWithPopup(auth, provider)
@@ -18,10 +22,8 @@ const SocialLogin = () => {
                 email: user.email,
                 photo: user.photoURL
             }
-            axiosSecure.post('/users',saveUser)
+            axiosApi.post('/users',saveUser)
             .then(res => {
-                console.log(res.data);
-                if(res.data.insertedId){
                     Swal.fire({
                         position: 'top-end',
                         icon: 'success',
@@ -30,7 +32,6 @@ const SocialLogin = () => {
                         timer: 1500
                       })
                       navigate(from, {replace: true})
-                }
             })
 
             // IdP data available using getAdditionalUserInfo(result)
