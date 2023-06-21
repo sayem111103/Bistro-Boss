@@ -1,11 +1,47 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import SectionHeader from '../../../components/SectionHeader/SectionHeader';
+import { useState } from 'react';
+import useAxiosSecure from '../../../Hooks/useAxiosSecure';
+import Swal from 'sweetalert2';
 
 const AddItems = () => {
+    const [axiosSecure] = useAxiosSecure();
+    // const [error, setError] = useState('');
+    const url = `https://api.imgbb.com/1/upload?key=${import.meta.env.VITE_IMAGE_TOKEN}`
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
-    const onSubmit = data => {
-        console.log(data);
+
+    const onSubmit = datas => {
+        // setError('')
+        const formData = new FormData();
+        formData.append('image', datas.image[0])
+        fetch(url, {
+            method: 'POST',
+            body: formData
+        }).then(res => res.json())
+            .then(data => {
+                if (data.success === true) {
+                    const image = data.data.display_url;
+                    const config = {
+                        name: datas.name,
+                        recipe: datas.recipe,
+                        image: image,
+                        category: datas.category,
+                        price: parseFloat(datas.price)
+                    }
+                    axiosSecure.post('/menu', config)
+                        .then(res => {
+                            if (res.data.insertedId) {
+                                Swal.fire(
+                                    '',
+                                    'Item Added Successfully',
+                                    'success'
+                                )
+                            }
+                        })
+                }
+            })
+
     };
     return (
         <div className='w-full py-4'>
@@ -28,10 +64,16 @@ const AddItems = () => {
                             <label className="label">
                                 <span className="label-text">Category*</span>
                             </label>
-                            <select className='py-3 bg-white border px-3 rounded-lg focus-visible:outline-none' {...register("category")}>
-                                <option></option>
-                                <option value="male">male</option>
-                                <option value="other">other</option>
+                            <select defaultValue='Pick One' className='py-3 bg-white border px-3 rounded-lg focus-visible:outline-none' {...register("category", {
+                                required: true
+                            })}>
+                                <option disabled>Pick One</option>
+                                <option>pizza</option>
+                                <option>soup</option>
+                                <option>salad</option>
+                                <option>dessert</option>
+                                <option>desi</option>
+                                <option>drinks</option>
                             </select>
                             {errors.category && <span className='text-red-500'>This field is required</span>}
                         </div>
@@ -61,13 +103,13 @@ const AddItems = () => {
                         <label className="label">
                             <span className="label-text">Photo*</span>
                         </label>
-                        <input type="file" className="file-input file-input-bordered bg-white"  {...register("photo", {
+                        <input type="file" className="file-input file-input-bordered bg-white"  {...register("image", {
                             required: true
                         })} />
                         {errors.photo && <span className='text-red-500'>This field is required</span>}
                     </div>
 
-                <input className="btn mt-4 border-0 hover:bg-[rgba(209,159,84,0.7)] bg-[rgba(209,159,84,0.7)] text-white" type="submit"  value='add item'/>
+                    <input className="btn mt-4 border-0 hover:bg-[rgba(209,159,84,0.7)] bg-[rgba(209,159,84,0.7)] text-white" type="submit" value='add item' />
                 </form>
             </div>
         </div>

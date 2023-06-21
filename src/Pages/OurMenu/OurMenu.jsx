@@ -6,6 +6,7 @@ import ban1 from '../../assets/menu/banner3.jpg'
 import ban2 from '../../assets/home/chef-service.jpg'
 import CategoryMenu from '../../Shared/CategoryMenu/CategoryMenu';
 import useAuth from '../../Hooks/useAuth';
+import { Player } from '@lottiefiles/react-lottie-player';
 
 const OurMenu = () => {
     const {loader} = useAuth();

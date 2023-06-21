@@ -6,6 +6,7 @@ import useMenu from '../../Hooks/useMenu';
 import { useParams } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import useAuth from '../../Hooks/useAuth';
+import { Player } from '@lottiefiles/react-lottie-player';
 
 
 const OurShop = () => {

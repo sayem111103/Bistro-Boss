@@ -36,6 +36,13 @@ const FoodCard = ({md}) => {
 
         axiosSecure.post('/carts', carts)
         .then(res => {
+            if(res.data.message === "admin can't add to cart"){
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'admin can not add to cart',
+                  })
+            }
             if(res.data.insertedId){          
                 refetch()     
                 Swal.fire({
